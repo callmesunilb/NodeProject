@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="myApp" class="ng-scope">
+  <head>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <style type="text/css">
+        @charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}
+     </style>
+     <title>edureka! MEAN Application</title>     
+     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet"> 
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css" rel="stylesheet">
+      <link href="/stylesheets/style.css" rel="stylesheet">
+     <script src="/javascripts/jquery.min.js"></script>
+     <script src="/javascripts/bootstrap.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+
+     <script>
+          $(function() {
+            var datepicker=$("#datepicker").datepicker(
+                            {changeMonth:true,changeYear:true,maxDate:"-1M -1D -1Y",dateFormat:"yy-mm-dd"}
+                                                      );
+            $("#datepicker").bind("keydown", function (event) {
+              event.preventDefault();
+            });
+          });
+      </script>
+    
+</head>
+
+<body>
+    <div class="container ng-scope" ng-controller="AppCtrl"  ng-cloak>
+      <br>
+      <h1 align="center">Employee Directory App</h1><br><br>
+      
+      <form name="myform">
+      <table class="table">          
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Date of Birth</td>
+            <td>Department</td>
+            <td>Gender</td>
+            <td>Age</td>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                  <td>
+                    <input type="text" ng-minlength="3" class="form-control" ng-model="employee.name" required placeholder="Name">
+                  </td>
+                  <td>
+                    <input type="email" ng-minlength="3" ng-model="employee.email" class="form-control" required placeholder="abc@xyz.com">
+                  </td>
+                  <td>
+                    <input type="text" ng-model="employee.dob" id="datepicker" class="form-control hasDatepicker " required  placeholder="YYYY-MM-DD">
+                  </td>
+                  <td>
+                    <input type="text" ng-model="employee.dept" required  class="form-control " placeholder="Department">
+                  </td>
+                  <td>
+                    <input type="text" ng-model="employee.gender" required  class="form-control " placeholder="Gender">
+                  </td>
+                  <td>
+                    <input type="number" ng-model="employee.age" disabled=""  placeholder="Age">
+                  </td>
+                  <td>
+                      <button type="submit" class="btn btn-success btn-md" ng-disabled="myform.$invalid" ng-click="addEmployee()">Add Employee</button>
+                  </td>
+                  <td>
+                      <button type="submit" class="btn btn-success btn-md" ng-disabled="myform.$invalid" ng-click="updateEmployee()">Update Employee</button>
+                  </td>
+            </tr> 
+            <tr ng-repeat="emp in employees">
+                <td>{{emp.name}}</td>
+                <td>{{emp.email}}</td>               
+                <td>{{emp.dob | date}}</td>
+                <td>{{emp.dept}}</td>
+                <td>{{emp.gender}}</td>
+                <td>{{emp.age}} years</td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm" ng-click="removeEmployee(emp._id)">Delete</button>&nbsp;&nbsp;
+                  <button type="button" class="btn btn-primary btn-sm" ng-click="editEmployee(emp._id)">Edit</button>
+                </td>
+            </tr>
+          </tbody>
+        </table>  
+      </form>
+    </div>
+    <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+    <div class="modal" style="display: none">
+           <div class="loader" ></div>
+    </div>
+    <script src="/javascripts/angular.min.js"></script>  
+    <script src="/javascripts/myapp.js"></script>
+    <script src="/javascripts/controller.js"></script>
+  </body>
+</html>
