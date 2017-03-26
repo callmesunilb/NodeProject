@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var db= "mongodb://localhost:27017/employee";
+//var db= "mongodb://localhost:27017/employee";
+var db="mongodb://sunil:#{mydatabase}@ds141960.mlab.com:41960/employee";
 var chalk= require('chalk');
 mongoose.connect(db);
 

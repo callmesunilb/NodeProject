@@ -67,7 +67,9 @@ myApp.controller('AppCtrl', ['$scope', '$http', 'httpService',function($scope, $
     };
     
     $scope.updateEmployee = function() {
-      startLoader();
+
+      if($scope.employee._id=="") return  $scope.addEmployee();
+       startLoader();
       httpService.updateEmployee($scope.employee).then(function(data){
           $scope.employees=data;
           console.log(data);
